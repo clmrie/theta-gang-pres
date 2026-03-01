@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Project 2 — Manipulate Brain Code in Real Time</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Sans:wght@400;500;600;700&display=swap');
 
@@ -85,7 +89,7 @@
   }
 
   .logos img {
-    height: 65px;
+    height: 90px;
     object-fit: contain;
   }
 
@@ -352,13 +356,14 @@
 
   .brain-label-hippocampus {
     bottom: 42%;
-    left: 38%;
+    left: 102%;
+    white-space: nowrap;
   }
 
   .brain-label-hippocampus::before {
     content: '';
     position: absolute;
-    width: 40px;
+    width: 100px;
     height: 1px;
     background: var(--accent);
     top: 50%;
@@ -521,6 +526,415 @@
     animation: mouseShake 8s ease infinite;
   }
 
+  /* ── Shared slide layout (two-col) ── */
+  .slide-two-col {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    max-width: 1100px;
+    width: 100%;
+  }
+
+  .slide-two-col .text-col {
+    flex: 1;
+    max-width: 460px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .slide-two-col .visual-col {
+    flex: 0 0 auto;
+  }
+
+  .section-tag-generic {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .slide-title {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+
+  .slide-desc {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+
+  .slide-desc strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  /* ── Slide 5: Zone Partitioning ── */
+  .zone-maze-big { width: 420px; height: 420px; }
+
+  .zone-legend {
+    display: flex;
+    gap: 24px;
+    margin-top: 8px;
+  }
+
+  .zone-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+
+  .zone-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── Slide 6: Encoder + Transformer ── */
+  .pipeline-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    width: 400px;
+  }
+
+  .pipe-box {
+    width: 100%;
+    padding: 18px 24px;
+    background: var(--bg-card);
+    border: 1.5px solid rgba(175, 70, 53, 0.12);
+    border-radius: 12px;
+    text-align: center;
+  }
+
+  .pipe-box .pipe-label {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+
+  .pipe-box .pipe-main {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .pipe-box .pipe-sub {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+
+  .pipe-arrow {
+    font-size: 1.4rem;
+    color: var(--accent);
+    padding: 6px 0;
+    line-height: 1;
+  }
+
+  .pipe-box-highlight {
+    border-color: var(--accent);
+    background: rgba(175, 70, 53, 0.04);
+  }
+
+  /* ── Slide 7: Hierarchical Heads ── */
+  .heads-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    width: 480px;
+  }
+
+  .heads-branch {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+  }
+
+  .heads-branch .pipe-box {
+    flex: 1;
+    padding: 14px 10px;
+  }
+
+  .heads-branch .pipe-main {
+    font-size: 0.88rem;
+  }
+
+  .pipe-merge {
+    width: 100%;
+    padding: 16px 24px;
+    background: var(--gradient-1);
+    border-radius: 12px;
+    text-align: center;
+    color: #fff;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  .pipe-merge .pipe-sub {
+    color: rgba(255,255,255,0.7);
+    font-weight: 400;
+    font-size: 0.8rem;
+    margin-top: 4px;
+  }
+
+  .loss-bar {
+    width: 100%;
+    padding: 14px 20px;
+    background: rgba(175, 70, 53, 0.05);
+    border-left: 3px solid var(--accent-light);
+    border-radius: 0 10px 10px 0;
+    text-align: center;
+  }
+
+  .loss-bar code {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 0.82rem;
+    color: var(--text-primary);
+  }
+
+  .loss-term {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 14px;
+    margin-bottom: 6px;
+    background: var(--bg-card);
+    border-radius: 10px;
+    border-left: 3px solid var(--accent-light);
+    font-size: 1rem;
+  }
+  .loss-term .loss-formula { min-width: 200px; font-size: 1.05rem; }
+  .loss-term .loss-why {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+  }
+
+  /* ── Slide: Results ── */
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 900px;
+  }
+  .result-card {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 24px 20px;
+    text-align: center;
+    border: 1px solid rgba(175, 70, 53, 0.08);
+    transition: transform 0.2s ease;
+  }
+  .result-card:hover { transform: translateY(-4px); }
+  .result-card.hero {
+    grid-column: span 3;
+    background: var(--gradient-1);
+    color: #fff;
+    padding: 28px;
+  }
+  .result-card.hero .result-value { color: #fff; font-size: 3rem; }
+  .result-card.hero .result-label { color: rgba(255,255,255,0.85); }
+  .result-value {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1.1;
+  }
+  .result-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 6px;
+    font-weight: 500;
+  }
+  .result-sub {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+  .results-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    height: 100%;
+    padding: 40px;
+  }
+
+  /* ── Slide: Smoothing ── */
+  .smooth-videos {
+    display: flex;
+    gap: 24px;
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+  }
+  .smooth-video-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-height: 0;
+  }
+  .smooth-video-card video {
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    object-fit: contain;
+    border-radius: 12px;
+    border: 2px solid rgba(175, 70, 53, 0.12);
+  }
+  .smooth-video-label {
+    font-family: 'Instrument Sans', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: var(--accent);
+    flex-shrink: 0;
+    letter-spacing: 0.02em;
+  }
+
+  /* ── Slide: Visualizations ── */
+  .viz-grid {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    width: 100vw;
+    flex: 1;
+    min-height: 0;
+    gap: 4px;
+    padding: 0 10px;
+  }
+  .viz-item {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 0;
+  }
+  .viz-item img {
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    object-fit: contain;
+  }
+  .viz-item span {
+    font-family: 'Instrument Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    padding: 4px 0;
+    flex-shrink: 0;
+  }
+
+  /* ── Slide: Demo ── */
+  .slide-demo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 0 0;
+    gap: 0;
+    height: 100%;
+  }
+
+  .slide-demo .section-tag { display: none; }
+
+  .slide-demo h2 {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    flex-shrink: 0;
+    margin-bottom: 6px;
+  }
+
+  .video-container {
+    position: relative;
+    width: 100vw;
+    max-width: none;
+    flex: 1;
+    background: rgba(175, 70, 53, 0.04);
+    border: none;
+    border-top: 2px solid rgba(175, 70, 53, 0.12);
+    border-radius: 0;
+    overflow: hidden;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+  }
+
+  .video-container:hover {
+    box-shadow: 0 8px 40px rgba(175, 70, 53, 0.15);
+  }
+
+  .video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .play-btn::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 14px 0 14px 26px;
+    border-color: transparent transparent transparent #fff;
+    margin-left: 4px;
+  }
+
+  .video-container:hover .play-btn {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  .video-container.playing .play-btn {
+    opacity: 0;
+  }
+
   /* ── Navigation ── */
   .nav-dots {
     position: fixed;
@@ -642,10 +1056,19 @@
   <button class="nav-dot" data-slide="1"></button>
   <button class="nav-dot" data-slide="2"></button>
   <button class="nav-dot" data-slide="3"></button>
+  <button class="nav-dot" data-slide="4"></button>
+  <button class="nav-dot" data-slide="5"></button>
+  <button class="nav-dot" data-slide="6"></button>
+  <button class="nav-dot" data-slide="7"></button>
+  <button class="nav-dot" data-slide="8"></button>
+  <button class="nav-dot" data-slide="9"></button>
+  <button class="nav-dot" data-slide="10"></button>
+  <button class="nav-dot" data-slide="11"></button>
+  <button class="nav-dot" data-slide="12"></button>
 </nav>
 
 <div class="slide-counter">
-  <span id="current-slide">1</span> / <span id="total-slides">4</span>
+  <span id="current-slide">1</span> / <span id="total-slides">13</span>
 </div>
 
 <div class="nav-hint">&#8595; scroll or arrow keys</div>
@@ -727,9 +1150,8 @@
       <div class="text-side">
         <h2 class="question">Why does that happen?</h2>
         <p class="answer">
-          Short answer. The <strong>hippocampus</strong>.<br>
-          The long answer: its subfield <strong>CA1</strong>, which projects to the <strong>amygdala</strong>, then to the <strong>PAG</strong> : the brain's pain and fear center.<br><br>
-          CA1 contains <strong>"place cells"</strong>, neurons that fire at specific locations.        </p>
+          Short answer: the <strong>hippocampus</strong>.<br>
+          The long answer: it's a 3-component system. The <strong>hippocampus</strong> for location, the <strong>amygdala</strong> as the center for fear, and the <strong>amygdala-PAG complex</strong> for voluntary behavior and fear response to a threat.        </p>
         <p class="answer" style="margin-top: 20px; margin-bottom: 0;">
           To decode this, we need to <strong>record neural activity</strong> from this region
         </p>
@@ -807,6 +1229,277 @@
             <polygon points="0,-40 10,-10 32,-18 7,18 22,24 -10,55 -4,18 -28,24" fill="#f5c542" stroke="#d4a017" stroke-width="1.5"/>
           </svg>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 5: Zone Partitioning -->
+  <section class="slide" data-index="4">
+    <div class="slide-two-col">
+      <div class="text-col">
+        <div class="section-tag-generic">Step 1 &mdash; Preprocessing</div>
+        <h2 class="slide-title">Partition the maze into 3 zones</h2>
+        <p class="slide-desc">
+          Curvilinear distance <strong>d</strong> is just how far along the
+          <strong>center path</strong> of the U-maze a point is, from 0 (start) to 1 (end).
+        </p>
+        <p class="slide-desc">
+          Simple thresholds on <strong>d</strong> give us 3 zones &mdash; no training needed.
+        </p>
+      </div>
+      <div class="visual-col" style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
+        <div style="position: relative; width: 420px;">
+          <img src="graphs/segmentation.png" alt="3-zone segmentation" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 20px rgba(175, 70, 53, 0.1);">
+          <svg viewBox="0 0 100 100" style="position: absolute; top: 7%; left: 10%; width: 78%; height: 86%; pointer-events: none;">
+            <polyline points="17,100 17,10 84,10 84,100" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="zone-legend">
+          <div class="zone-legend-item">
+            <span class="zone-dot" style="background: #4285f4;"></span>
+            <span>Left &mdash; d &lt; 0.35</span>
+          </div>
+          <div class="zone-legend-item">
+            <span class="zone-dot" style="background: #34a853;"></span>
+            <span>Top &mdash; d &lt; 0.65</span>
+          </div>
+          <div class="zone-legend-item">
+            <span class="zone-dot" style="background: #af4635;"></span>
+            <span>Right &mdash; d &ge; 0.65</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 6: Encoder + Transformer -->
+  <section class="slide" data-index="5">
+    <div class="slide-two-col">
+      <div class="text-col">
+        <div class="section-tag-generic">Step 2 &mdash; Model</div>
+        <h2 class="slide-title">From spikes to a neural representation</h2>
+        <p class="slide-desc">
+          Each electrode group's spikes &rarr; <strong>1D CNN</strong> &rarr; 64-dim embedding &rarr; <strong>Transformer</strong> &rarr; one vector summarizing the neural state.
+        </p>
+        <div class="punchline" style="margin-top: 8px;">
+          Data augmentation: spike dropout (15%) + Gaussian noise
+        </div>
+      </div>
+      <div class="visual-col">
+        <div class="pipeline-visual">
+          <div class="pipe-box">
+            <div class="pipe-label">Input</div>
+            <div class="pipe-main">Spike Waveforms</div>
+            <div class="pipe-sub">32 samples &times; 20 neurons &times; 4 groups</div>
+          </div>
+          <div class="pipe-arrow">&darr;</div>
+          <div class="pipe-box">
+            <div class="pipe-label">Encoder</div>
+            <div class="pipe-main">Per-group 1D CNN &rarr; 64-dim</div>
+            <div class="pipe-sub">Conv1d(5) &rarr; Conv1d(3) &rarr; AdaptiveAvgPool</div>
+          </div>
+          <div class="pipe-arrow">+</div>
+          <div class="pipe-box" style="border-style: dashed;">
+            <div class="pipe-main" style="font-size: 0.88rem;">Shank Embedding + Sinusoidal Pos. Encoding</div>
+          </div>
+          <div class="pipe-arrow">&darr;</div>
+          <div class="pipe-box pipe-box-highlight">
+            <div class="pipe-label">Backbone</div>
+            <div class="pipe-main">Transformer Encoder</div>
+            <div class="pipe-sub">2 layers &bull; 4 heads &bull; dim=64</div>
+          </div>
+          <div class="pipe-arrow">&darr;</div>
+          <div class="pipe-box">
+            <div class="pipe-main">Mean Pooling</div>
+            <div class="pipe-sub">over active spikes &rarr; 64-dim vector</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 7: Hierarchical Heads + Inference -->
+  <section class="slide" data-index="6">
+    <div class="slide-two-col">
+      <div class="text-col">
+        <div class="section-tag-generic">Step 3 &mdash; Decoding</div>
+        <h2 class="slide-title">Hierarchical prediction with uncertainty</h2>
+        <p class="slide-desc">
+          3 parallel heads predict: <strong>zone</strong>, <strong>(x, y) per zone</strong> with uncertainty, and <strong>d</strong>.
+          Final position = softmax-weighted mixture of zone heads.
+        </p>
+        <div style="margin-top: 12px; text-align: center; font-size: 1.4rem;">
+          $$\mathcal{L} \;=\; \mathcal{L}_{\text{cls}} + \mathcal{L}_{\text{pos}} + \mathcal{L}_{d} + 10\,\mathcal{L}_{\text{feas}}$$
+        </div>
+        <div style="margin-top: 8px;">
+          <div class="loss-term">
+            <span class="loss-formula">$\mathcal{L}_{\text{cls}} = -\sum_c y_c \log \hat{y}_c$</span>
+            <span class="loss-why">classify correct zone</span>
+          </div>
+          <div class="loss-term">
+            <span class="loss-formula">$\mathcal{L}_{\text{pos}} = \tfrac{1}{2}\log\sigma^2 + \tfrac{(\mathbf{x}-\boldsymbol{\mu})^2}{2\sigma^2}$</span>
+            <span class="loss-why">(x, y) with learned uncertainty</span>
+          </div>
+          <div class="loss-term">
+            <span class="loss-formula">$\mathcal{L}_{d} = (d - \hat{d})^2$</span>
+            <span class="loss-why">curvilinear distance</span>
+          </div>
+          <div class="loss-term">
+            <span class="loss-formula">$\mathcal{L}_{\text{feas}} = \text{ReLU}(d_{\min} - w)^2$</span>
+            <span class="loss-why">stay inside corridor</span>
+          </div>
+        </div>
+      </div>
+      <div class="visual-col">
+        <div class="heads-visual">
+          <div class="pipe-box" style="width: 100%;">
+            <div class="pipe-main">64-dim pooled vector</div>
+          </div>
+          <div class="pipe-arrow">&darr;</div>
+          <div class="heads-branch">
+            <div class="pipe-box">
+              <div class="pipe-label">Classifier</div>
+              <div class="pipe-main">Zone</div>
+              <div class="pipe-sub">3-way softmax</div>
+            </div>
+            <div class="pipe-box">
+              <div class="pipe-label">Regression</div>
+              <div class="pipe-main">3&times; (&mu;, &sigma;)</div>
+              <div class="pipe-sub">per zone</div>
+            </div>
+            <div class="pipe-box">
+              <div class="pipe-label">Distance</div>
+              <div class="pipe-main">d</div>
+              <div class="pipe-sub">Sigmoid [0,1]</div>
+            </div>
+          </div>
+          <div class="pipe-arrow">&darr;</div>
+          <div class="pipe-merge">
+            Softmax-weighted mixture &rarr; (x, y)
+            <div class="pipe-sub">+ uncertainty &sigma;</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 8: Demo -->
+  <section class="slide" data-index="7">
+    <div class="slide-demo">
+      <div class="section-tag">Live Demo</div>
+      <h2>Demo</h2>
+      <div class="video-container" id="demo-video-container">
+        <video id="demo-video" src="videos_demo/raw.mov" preload="metadata"></video>
+        <div class="play-btn"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 9: Post-Processing -->
+  <section class="slide" data-index="8">
+    <div style="display: flex; flex-direction: column; height: 100%; padding: 30px 40px 20px;">
+      <div style="text-align: center; flex-shrink: 0;">
+        <div class="section-tag-generic">Step 4 &mdash; Post-Processing</div>
+        <h2 class="slide-title" style="margin-bottom: 4px;">Smoothing &amp; Corridor Constraint</h2>
+        <p class="slide-desc" style="max-width: 700px; margin: 0 auto 16px;">
+          Raw predictions are smoothed with a <strong>Savitzky-Golay filter</strong> (window=31, order=3),
+          then clamped inside the <strong>U-maze corridor</strong> (&plusmn;0.15).
+        </p>
+      </div>
+      <div class="smooth-videos">
+        <div class="smooth-video-card">
+          <div class="smooth-video-label">Raw predictions</div>
+          <video id="vid-raw" src="videos_demo/carré brute.mov" autoplay muted playsinline></video>
+        </div>
+        <div class="smooth-video-card">
+          <div class="smooth-video-label">After smoothing</div>
+          <video id="vid-smooth" src="videos_demo/carré lissé.mov" autoplay muted playsinline></video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 10: Results -->
+  <section class="slide" data-index="9">
+    <div class="results-wrapper">
+      <div class="section-tag-generic">Results</div>
+      <h2 class="slide-title" style="margin-bottom: 4px;">Our Model Performance</h2>
+
+      <div class="results-grid">
+        <div class="result-card hero">
+          <div class="result-value">0.03</div>
+          <div class="result-label">$\text{MSE}_x$ &amp; $\text{MSE}_y$</div>
+        </div>
+
+        <div class="result-card">
+          <div class="result-value">0.22</div>
+          <div class="result-label">Euclidean Distance</div>
+          <div class="result-sub">mean error to ground truth</div>
+        </div>
+
+        <div class="result-card">
+          <div class="result-value">82%</div>
+          <div class="result-label">Zone Accuracy</div>
+          <div class="result-sub">3-zone classification</div>
+        </div>
+
+        <div class="result-card">
+          <div class="result-value">4.5 ms</div>
+          <div class="result-label">Inference Latency</div>
+          <div class="result-sub">real-time capable</div>
+        </div>
+
+        <div class="result-card">
+          <div class="result-value">-10%</div>
+          <div class="result-label">Error Reduction</div>
+          <div class="result-sub">smoothing vs. raw</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 11: Visualizations -->
+  <section class="slide" data-index="10">
+    <div style="display: flex; flex-direction: column; height: 100%; padding: 8px 0 0;">
+      <h2 class="slide-title" style="text-align: center; margin-bottom: 4px; flex-shrink: 0;">Visualizations</h2>
+      <div class="viz-grid">
+        <div class="viz-item">
+          <img src="graphs/position_X.png" alt="Position X predictions">
+          <span>Position X</span>
+        </div>
+        <div class="viz-item">
+          <img src="graphs/position_Y.png" alt="Position Y predictions">
+          <span>Position Y</span>
+        </div>
+        <div class="viz-item">
+          <img src="graphs/zone_error.png" alt="Zone error">
+          <span>Error by Zone</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 12: Smoothed Predictions -->
+  <section class="slide" data-index="11">
+    <div style="display: flex; flex-direction: column; align-items: center; height: 100%; padding: 8px 0 0;">
+      <h2 class="slide-title" style="text-align: center; margin-bottom: 4px; flex-shrink: 0;">Smoothed Predictions</h2>
+      <div style="flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; width: 100vw; padding: 0 10px;">
+        <img src="graphs/smoothed.png" alt="Smoothed predictions" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 13: Thanks -->
+  <section class="slide" data-index="12">
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 30px;">
+      <h2 style="font-family: 'Instrument Sans', sans-serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 800; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-align: center;">
+        Thanks for your attention!<br>Questions?
+      </h2>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
+        <p style="font-size: 1rem; color: var(--text-secondary); font-weight: 500;">
+          <a href="https://github.com/clmrie/theta-gang" style="color: var(--accent); text-decoration: none;">github.com/clmrie/theta-gang</a>
+        </p>
+        <img src="logos/qr_repo.png" alt="QR code" style="width: 300px; height: 300px; border-radius: 12px;">
       </div>
     </div>
   </section>
@@ -897,6 +1590,44 @@
       else goToSlide(current - 1);
     }
   });
+
+  // Demo video play/pause
+  const videoContainer = document.getElementById('demo-video-container');
+  const video = document.getElementById('demo-video');
+  videoContainer.addEventListener('click', () => {
+    if (video.paused) {
+      video.play();
+      videoContainer.classList.add('playing');
+      if (video.requestFullscreen) video.requestFullscreen();
+      else if (video.webkitEnterFullScreen) video.webkitEnterFullScreen();
+    } else {
+      video.pause();
+      videoContainer.classList.remove('playing');
+    }
+  });
+  video.addEventListener('ended', () => {
+    videoContainer.classList.remove('playing');
+    if (document.exitFullscreen) document.exitFullscreen();
+    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+  });
+
+  // Sync smoothing videos: wait for both to end, then restart together
+  const vidRaw = document.getElementById('vid-raw');
+  const vidSmooth = document.getElementById('vid-smooth');
+  let rawEnded = false, smoothEnded = false;
+
+  function restartBoth() {
+    if (rawEnded && smoothEnded) {
+      rawEnded = false;
+      smoothEnded = false;
+      vidRaw.currentTime = 0;
+      vidSmooth.currentTime = 0;
+      vidRaw.play();
+      vidSmooth.play();
+    }
+  }
+  vidRaw.addEventListener('ended', () => { rawEnded = true; restartBoth(); });
+  vidSmooth.addEventListener('ended', () => { smoothEnded = true; restartBoth(); });
 </script>
 
 </body>
