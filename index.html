@@ -1041,6 +1041,136 @@
     0%, 100% { opacity: 0.4; }
     50% { opacity: 0.8; }
   }
+
+  /* ── Tablet ── */
+  @media (max-width: 1024px) {
+    .slide { padding: 28px; }
+
+    .slide-motivation, .slide-brain, .slide-problem, .slide-two-col {
+      gap: 36px;
+    }
+
+    .slide-motivation .image-side img,
+    .slide-brain .image-side img {
+      max-width: 100%; width: auto; height: auto;
+    }
+    .slide-motivation .image-side img { max-height: 340px; }
+    .slide-brain .image-side img { max-height: 360px; }
+
+    .maze-svg { width: 360px; height: 360px; }
+    .pipeline-visual { width: 320px; }
+    .heads-visual { width: 380px; }
+
+    .bg-glow { width: 400px; height: 400px; }
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 768px) {
+    .slide { padding: 20px 16px; }
+
+    /* Stack all two-column layouts */
+    .slide-motivation, .slide-brain, .slide-problem, .slide-two-col {
+      flex-direction: column;
+      gap: 24px;
+      max-width: 100%;
+    }
+
+    .text-side, .text-col, .left-side {
+      max-width: 100% !important;
+    }
+
+    .image-side, .visual-col {
+      width: 100%;
+      align-items: center;
+    }
+
+    .slide-motivation .image-side img,
+    .slide-brain .image-side img {
+      width: 100%; max-width: 360px; height: auto;
+    }
+
+    .maze-svg { width: 280px; height: 280px; }
+    .pipeline-visual { width: 100%; max-width: 320px; }
+    .heads-visual { width: 100%; max-width: 360px; }
+
+    /* Title slide */
+    .logos { gap: 16px; }
+    .logos img { height: 50px; }
+    .team { gap: 20px; }
+    .member-photo { width: 80px !important; height: 80px !important; }
+    .member-placeholder { width: 70px !important; height: 70px !important; }
+    .subtitle { max-width: 100%; }
+
+    /* Zone partitioning inline width */
+    .visual-col > div[style*="width: 420px"] {
+      width: 100% !important; max-width: 320px;
+    }
+
+    /* Results grid */
+    .results-grid {
+      grid-template-columns: 1fr;
+      max-width: 400px;
+    }
+    .result-card.hero { grid-column: span 1; }
+
+    /* Smoothing videos — stack */
+    .smooth-videos { flex-direction: column; gap: 16px; }
+
+    /* Viz grid */
+    .viz-grid { flex-direction: column; gap: 8px; padding: 0 8px; }
+
+    /* Demo slide padding */
+    .slide-demo { padding: 4px 0 0; }
+
+    /* Typography */
+    .context { font-size: 0.95rem; }
+    .punchline { font-size: 1.05rem; padding: 12px 16px; }
+    .hook { margin-bottom: 12px; }
+    .answer { font-size: 1rem; }
+    .slide-desc { font-size: 0.9rem; }
+    .result-value { font-size: 1.8rem; }
+    .loss-formula { min-width: auto !important; font-size: 0.9rem; }
+    .loss-why { font-size: 0.85rem; }
+
+    /* Navigation */
+    .nav-dots { display: none; }
+    .slide-counter { bottom: 16px; right: 16px; font-size: 0.75rem; }
+    .nav-hint { bottom: 16px; font-size: 0.8rem; }
+
+    /* Background */
+    .bg-glow { width: 300px; height: 300px; }
+  }
+
+  /* ── Small phones ── */
+  @media (max-width: 480px) {
+    .slide { padding: 14px 12px; }
+
+    .maze-svg { width: 220px; height: 220px; }
+
+    .member-photo { width: 60px !important; height: 60px !important; }
+    .member-placeholder { width: 54px !important; height: 54px !important; }
+    .member-name { font-size: 0.75rem; }
+    .member-uni { font-size: 0.6rem; }
+    .team { gap: 14px; }
+    .logos img { height: 36px; }
+
+    .slide-motivation .image-side img,
+    .slide-brain .image-side img {
+      max-width: 280px;
+    }
+
+    .results-grid { max-width: 100%; gap: 12px; }
+    .result-card { padding: 16px 14px; }
+    .result-card.hero { padding: 18px; }
+    .result-value { font-size: 1.5rem; }
+
+    .pipe-box { padding: 12px 14px; }
+    .loss-term { flex-direction: column; gap: 6px; }
+
+    .smooth-video-label { font-size: 1.1rem; }
+
+    .bg-glow { width: 200px; height: 200px; }
+  }
 </style>
 </head>
 <body>
@@ -1248,7 +1378,7 @@
         </p>
       </div>
       <div class="visual-col" style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
-        <div style="position: relative; width: 420px;">
+        <div style="position: relative; width: 420px; max-width: 100%;">
           <img src="graphs/segmentation.png" alt="3-zone segmentation" style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 20px rgba(175, 70, 53, 0.1);">
           <svg viewBox="0 0 100 100" style="position: absolute; top: 7%; left: 10%; width: 78%; height: 86%; pointer-events: none;">
             <polyline points="17,100 17,10 84,10 84,100" fill="none" stroke="#000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1397,7 +1527,7 @@
 
   <!-- SLIDE 9: Post-Processing -->
   <section class="slide" data-index="8">
-    <div style="display: flex; flex-direction: column; height: 100%; padding: 30px 40px 20px;">
+    <div style="display: flex; flex-direction: column; height: 100%; padding: 30px clamp(16px, 4vw, 40px) 20px;">
       <div style="text-align: center; flex-shrink: 0;">
         <div class="section-tag-generic">Step 4 &mdash; Post-Processing</div>
         <h2 class="slide-title" style="margin-bottom: 4px;">Smoothing &amp; Corridor Constraint</h2>
@@ -1499,7 +1629,7 @@
         <p style="font-size: 1rem; color: var(--text-secondary); font-weight: 500;">
           <a href="https://github.com/clmrie/theta-gang" style="color: var(--accent); text-decoration: none;">github.com/clmrie/theta-gang</a>
         </p>
-        <img src="logos/qr_repo.png" alt="QR code" style="width: 300px; height: 300px; border-radius: 12px;">
+        <img src="logos/qr_repo.png" alt="QR code" class="qr-code" style="width: 300px; max-width: 80vw; height: auto; border-radius: 12px;">
       </div>
     </div>
   </section>
