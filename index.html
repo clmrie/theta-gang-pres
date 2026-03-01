@@ -1066,7 +1066,7 @@
 
   /* ── Mobile ── */
   @media (max-width: 768px) {
-    .slide { padding: 20px 16px; }
+    .slide { padding: 20px 16px; overflow-y: auto; justify-content: flex-start; padding-top: 24px; }
 
     /* Stack all two-column layouts */
     .slide-motivation, .slide-brain, .slide-problem, .slide-two-col {
@@ -1118,6 +1118,13 @@
 
     /* Viz grid */
     .viz-grid { flex-direction: column; gap: 8px; padding: 0 8px; }
+
+    /* Pipeline/heads compact */
+    .pipe-box { padding: 10px 14px; }
+    .pipe-box .pipe-sub { font-size: 0.7rem; }
+    .pipe-box .pipe-main { font-size: 0.88rem; }
+    .pipe-arrow { padding: 2px 0; font-size: 1.1rem; }
+    .pipe-merge { padding: 10px 14px; font-size: 0.95rem; }
 
     /* Demo slide padding */
     .slide-demo { padding: 4px 0 0; }
